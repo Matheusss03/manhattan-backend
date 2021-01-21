@@ -3,13 +3,16 @@ const app = express()
 const cors = require("cors")
 const PORT = 4000
 const mongoose = require("mongoose")
+
 app.use(cors())
 
-mongoose.connect("mongodb://127.0.0.1:27017/usuarios", {
+mongoose.connect("mongodb://127.0.0.1:27017/manhattan", {
   useNewUrlParser: true
+}).then(()=>{console.log("Mongobd Conectado...");})
+.catch((error)=>{console.log("Houve um erro: " + error)
 })
 
-const connection = mongoose.connection
+const connection = mongoose.connection  
 
 connection.once("open", function() {
   console.log("Connection with MongoDB was successful")
@@ -19,7 +22,7 @@ app.listen(PORT, function() {
   console.log("Server is running on Port: " + PORT)
 })
 
-let usuario = require("./model")
+let usuario = require("../models/usuario")
 	
 const router = express.Router()
 

@@ -1,13 +1,13 @@
-const mongoose = require("mongoose")
+const mongoose = require('../database')
 
 const Schema = mongoose.Schema
 
-let usuario = new Schema({
-  tipo: {
+const Usuario = new Schema({
+  /*tipo: {
     type: String,
     enum: ["Supervisor de Radioproteção", "Responsável Técnico", "Operador", "Titular"],
     required: true
-  },
+  },*/
   nome: {
     type: String,
     min: 5,
@@ -17,9 +17,10 @@ let usuario = new Schema({
   cpf: {
     type: String,
     min: [11, "Valor inválido."],
+    unique: true,
     max: 11,
     required: true
-  },
+  }/*,
   cnen: {
     type: String,
     min: 4,
@@ -40,17 +41,11 @@ let usuario = new Schema({
   conselho: {
     type: String,
     enum: ["CRM","CRF","COREN","CRBM"]
-  }
+  },
+  dataAgora: {
+    type: Date,
+    default: Date.now
+  }*/
 })
 
-module.exports = mongoose.model("usuario", usuario)
-
-/*var User
-if (mongoose.models.User) {
-  User = mongoose.model('User')
-}
-else {
-  User = mongoose.model('User', UserSchema)
-}
-
-module.exports = User*/
+module.exports = mongoose.model("Usuario", Usuario)
