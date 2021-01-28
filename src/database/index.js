@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 mongoose.Promise = global.Promise
 
-mongoose.connect("mongodb://localhost/manhattan", {
+mongoose.connect("mongodb+srv://deploy:manhattan123@mongo-manhattan.hjeqi.mongodb.net/manhattan?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
