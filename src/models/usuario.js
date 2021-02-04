@@ -60,8 +60,13 @@ const Usuario = new Schema({
   dataAgora: {
     type: Date, 
     default: () => Date.now() - 3*60*60*1000
-  }
+  },
+},
+
+{
+  collection: 'usuarios'
 })
+
 
 Usuario.pre('save', async function(next){
   const hash = await bcrypt.hash(this.senha, 10)

@@ -13,12 +13,21 @@ function generateToken(params = {}) {
     })
 }
 
+/* Listar Todos */
+router.get('/', async (req, res) => {
+    User.find(function(err, usuarios){
+        if (err) console.log(err) 
+        else res.json(usuarios)
+    })
+})
+
 /* Registro Novo */
 router.post('/register', async (req, res) => {
     try {
-        const user = await User.create(req.body)
+        //const user = await User.create(req.body)
 
-        //user.senha = undefined
+        let user = new User(req.body)
+        user.save()
 
         return res.send( { 
             user,
