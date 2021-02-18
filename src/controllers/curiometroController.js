@@ -5,7 +5,7 @@ const DadoCalibrador = require('../models/dado_calibrador')
 const router = express.Router()
 
 /* Novo Registro */
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
     try {
         const diario = new DadoCalibrador
     (req.body)
@@ -29,7 +29,7 @@ router.get('/todos', async (req, res) => {
 })
 
 /* Atualizar um diário */
-router.post('/update/:id', (req, res) => {
+router.post('/update/:id', async (req, res) => {
     DadoCalibrador.findById(req.params.id, function(err, dado){
         if (!dado) {
             res.status(404).send('Dado não encontrado')
