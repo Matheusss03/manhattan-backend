@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema
 
 var validateEmail = function(email) {
-  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
   return re.test(email)
 }
 
@@ -17,7 +17,7 @@ const Usuario = new Schema({
   nome: {
     type: String,
     min: 5,
-    max: 45,
+    max: 60,
     required: true
   },
   cpf: {
@@ -43,7 +43,8 @@ const Usuario = new Schema({
   celular: {
     type: String,
     min: 11,
-    max: 11
+    max: 11,
+    required: true
   },
   email: {
     type: String,

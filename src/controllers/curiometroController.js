@@ -1,13 +1,14 @@
 const express = require('express')
 
-const MedidorAtividade = require('../models/medidorAtividade')
+const DadoCalibrador = require('../models/dado_calibrador')
 
 const router = express.Router()
 
 /* Novo Registro */
 router.post('/add', (req, res) => {
     try {
-        const diario = new MedidorAtividade(req.body)
+        const diario = new DadoCalibrador
+    (req.body)
         diario.save()
 
         return res.send( { 
@@ -20,7 +21,8 @@ router.post('/add', (req, res) => {
 
 /* Listar Todos Diarios*/
 router.get('/todos', async (req, res) => {
-    MedidorAtividade.find(function(err, diarios){
+    DadoCalibrador
+.find(function(err, diarios){
         if (err) console.log(err) 
         else res.json(diarios)
     })

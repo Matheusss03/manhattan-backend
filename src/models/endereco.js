@@ -27,7 +27,12 @@ const Endereco = new Schema({
   },
   complemento: {
     type: String
+  },
+},
+
+  {
+    collection: 'enderecos'
   }
-})
+)
 
 module.exports = mongoose.model("Endereco", Endereco)

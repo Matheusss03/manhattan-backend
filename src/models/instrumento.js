@@ -1,5 +1,4 @@
-const mongoose = require('../database');
-const { collection } = require('./usuario');
+const mongoose = require('../database')
 
 const Schema = mongoose.Schema
 
@@ -14,7 +13,7 @@ const Instrumento = new Schema({
   fabricante: {
     type: String,
     min: 2,
-    max: 40,
+    max: 60,
     required: true
   },
   modelo: {

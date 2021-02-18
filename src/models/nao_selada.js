@@ -13,8 +13,6 @@ const NaoSelada = new Schema({
   },
   atividade: {
     type: Number,
-    min: 3,
-    max: 4,
     required: true
   },
   unidadeMedida: {
@@ -28,7 +26,7 @@ const NaoSelada = new Schema({
   }
 },
 {
-    collection: 'fontesNaoSeladas'
+    collection: 'nao_seladas'
 })
 
 

@@ -29,8 +29,6 @@ const Selada = new Schema({
   },
   atividade: {
     type: Number,
-    min: 3,
-    max: 4,
     required: true
   },
   unidadeMedida: {
@@ -44,7 +42,7 @@ const Selada = new Schema({
   }
 },
 {
-    collection: 'fontesSeladas'
+    collection: 'seladas'
 })
 
 module.exports = mongoose.model("Selada", Selada)

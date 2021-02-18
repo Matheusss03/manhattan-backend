@@ -54,10 +54,6 @@ router.post('/authenticate', async (req, res) => {
 
     user.senha = undefined
 
-    const token = jwt.sign({ id: user.id}, authConfig.secret, {
-        expiresIn: 86400
-    })
-
     res.send( { 
         user, 
         token: generateToken({ id: user.id })
