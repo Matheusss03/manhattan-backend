@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const DadoCalibrador = new Schema({
   ajusteZero: {
     type: String,
-    default: "N/A"
+    default: "N/A",
+    required: true
   },
   data: {
     type: Date, 
