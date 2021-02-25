@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) => {
 })
 
 /* Listar Todos Diarios*/
-router.get('/todos', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const diarios = await DadoCalibrador.find()
 
