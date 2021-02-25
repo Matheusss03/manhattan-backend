@@ -33,16 +33,19 @@ router.get('/:id', async (req, res) => {
 
         return res.send()
     } catch (err) {
-        return res.status(400).send({error: 'Erro ao pegar objeto!'})
+        return res.status(400).send({error: 'Erro ao deletar objeto!'})
     }
 })
 
 /* Listar Todos Diarios*/
 router.get('/todos', async (req, res) => {
-    DadoCalibrador.find(function(err, diarios){
-        if (err) console.log(err) 
-        else res.json(diarios)
-    })
+    try {
+        const diarios = await DadoCalibrador.find()
+
+        return res.send({diarios})
+    } catch (err) {
+        return res.status(400).send({error: 'Erro ao pegar todos os dados!'})
+    }
 })
 
 /* Atualizar um diário */
