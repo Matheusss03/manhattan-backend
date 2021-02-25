@@ -7,28 +7,57 @@ const router = express.Router()
 /* Novo Registro */
 router.post('/add', async (req, res) => {
     try {
-        const diario = new DadoCalibrador
-    (req.body)
-        diario.save()
+        const diario = await DadoCalibrador.create(req.body)
 
-        return res.send( { 
-            diario
-        })
+        return res.send( { diario })
     } catch (err) {
         return res.status(400).send({ error: "Deu ruim!  " + err })
     }
 })
 
+/* Pega um em especíico */
+router.get('/:id', async (req, res) => {
+    try {
+        const dado = await DadoCalibrador.findById(req.params.id)
+
+        return res.send({ dado })
+    } catch (err) {
+        return res.status(400).send({error: 'Erro ao pegar objeto!'})
+    }
+})
+
+/* Deleta um especíico */
+router.get('/:id', async (req, res) => {
+    try {
+        await DadoCalibrador.findByIdAndRemove(req.params.id)
+
+        return res.send()
+    } catch (err) {
+        return res.status(400).send({error: 'Erro ao pegar objeto!'})
+    }
+})
+
 /* Listar Todos Diarios*/
 router.get('/todos', async (req, res) => {
-    DadoCalibrador
-.find(function(err, diarios){
+    DadoCalibrador.find(function(err, diarios){
         if (err) console.log(err) 
         else res.json(diarios)
     })
 })
 
 /* Atualizar um diário */
+router.put('/update/:id', async (req, res) => {
+    try {
+        const diario = await DadoCalibrador.findByIdAndUpdate(req.params.id, {new: true})
+
+        return res.send( { diario })
+    } catch (err) {
+        return res.status(400).send({ error: "Deu ruim!  " + err })
+    }
+})
+
+
+/*
 router.post('/update/:id', async (req, res) => {
     DadoCalibrador.findById(req.params.id, function(err, dado){
         if (!dado) {
@@ -53,5 +82,5 @@ router.post('/update/:id', async (req, res) => {
         })
     })
 })
-
+*/
 module.exports = app => app.use('/curiometro', router)

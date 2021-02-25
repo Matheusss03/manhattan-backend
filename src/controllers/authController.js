@@ -14,7 +14,7 @@ function generateToken(params = {}) {
 }
 
 /* Listar Todos */
-router.get('/', async (req, res) => {
+router.get('/todos', async (req, res) => {
     User.find(function(err, usuarios){
         if (err) console.log(err) 
         else res.json(usuarios)
@@ -22,12 +22,12 @@ router.get('/', async (req, res) => {
 })
 
 /* Registro Novo */
-router.post('/register', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
-        //const user = await User.create(req.body)
+        const user = await User.create(req.body)
 
-        let user = new User(req.body)
-        user.save()
+        //let user = new User(req.body)
+        //user.save()
 
         return res.send( { 
             user,
@@ -36,6 +36,32 @@ router.post('/register', async (req, res) => {
     } catch (err) {
         return res.status(400).send({ error: "Deu ruim!  " + err })
     }
+})
+
+/* Atualiza Usuário */
+router.post('/update/:id', async (req, res) => {
+    User.findById(req.params.id, function(err, dado){
+        if (!dado) {
+            res.status(404).send('Dado não encontrado')
+        } else {
+            dado.nome = req.body.nome
+            dado.tipo = req.body.tipo
+            dado.cpf = req.body.cpf
+            dado.cheio = req.body.cheio
+            dado.vazio = req.body.vazio
+            dado.altaTensao = req.body.altaTensao
+            dado.bario = req.body.bario
+            dado.cesio = req.body.cesio
+            dado.cobalto = req.body.cobalto
+        }
+
+        dado.save().then(dado => {
+            res.json('Dado atualizado!!')
+        })
+        .catch(err => {
+            res.status(404).send('Atualização não foi possível')
+        })
+    })
 })
 
 /* Autenticação */
