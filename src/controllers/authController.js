@@ -15,7 +15,7 @@ function generateToken(params = {}) {
 
 /* Listar Todos */
 router.get('/todos', async (req, res) => {
-    User.find(function(err, usuarios){
+    await User.find(function(err, usuarios){
         if (err) console.log(err) 
         else res.json(usuarios)
     })

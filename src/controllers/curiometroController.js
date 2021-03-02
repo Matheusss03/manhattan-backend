@@ -38,14 +38,12 @@ router.get('/:id', async (req, res) => {
 })
 
 /* Listar Todos Diarios*/
-router.get('/', async (req, res) => {
-    try {
-        const diarios = await DadoCalibrador.find()
+router.get('/todos', async (req, res) => {
+    await DadoCalibrador.find(function(err,dados){
+        if(err) console.log(err)
+        else res.json(dados)
+    })
 
-        return res.send({diarios})
-    } catch (err) {
-        return res.status(400).send({error: 'Erro ao pegar todos os dados!'})
-    }
 })
 
 /* Atualizar um diário */
