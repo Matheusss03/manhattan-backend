@@ -4,6 +4,15 @@ const DadoCalibrador = require('../models/dado_calibrador')
 
 const router = express.Router()
 
+/* Listar Todos Diarios*/
+router.get('/todos', async (req, res) => {
+    await DadoCalibrador.find(function(err,dados){
+        if(err) res.status(400).send({error: 'Erro ao pegar todos os elementos!!  ' + err})
+        else res.json(dado)
+    })
+
+})
+
 /* Novo Registro */
 router.post('/add', async (req, res) => {
     try {
@@ -14,36 +23,27 @@ router.post('/add', async (req, res) => {
         return res.status(400).send({ error: "Deu ruim!  " + err })
     }
 })
-
-/* Pega um em especíico */
+/*
+/* Pega um em específico */
 router.get('/:id', async (req, res) => {
     try {
         const dado = await DadoCalibrador.findById(req.params.id)
 
         return res.send({ dado })
     } catch (err) {
-        return res.status(400).send({error: 'Erro ao pegar objeto!'})
+        return res.status(400).send({error: 'Erro ao pegar objeto!  ' + err})
     }
 })
 
 /* Deleta um especíico */
-router.get('/:id', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     try {
         await DadoCalibrador.findByIdAndRemove(req.params.id)
 
         return res.send()
     } catch (err) {
-        return res.status(400).send({error: 'Erro ao deletar objeto!'})
+        return res.status(400).send({error: 'Erro ao deletar objeto!  ' + err})
     }
-})
-
-/* Listar Todos Diarios*/
-router.get('/todos', async (req, res) => {
-    await DadoCalibrador.find(function(err,dados){
-        if(err) console.log(err)
-        else res.json(dados)
-    })
-
 })
 
 /* Atualizar um diário */
