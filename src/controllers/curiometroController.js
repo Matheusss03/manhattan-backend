@@ -8,7 +8,7 @@ const router = express.Router()
 router.get('/todos', async (req, res) => {
     await DadoCalibrador.find(function(err,dados){
         if(err) res.status(400).send({error: 'Erro ao pegar todos os elementos!!  ' + err})
-        else res.json(dado)
+        else res.json(dados)
     })
 
 })
@@ -23,7 +23,7 @@ router.post('/add', async (req, res) => {
         return res.status(400).send({ error: "Deu ruim!  " + err })
     }
 })
-/*
+
 /* Pega um em específico */
 router.get('/:id', async (req, res) => {
     try {
