@@ -47,6 +47,7 @@ router.get('/delete/:id', async (req, res) => {
 })
 
 /* Atualizar um diário */
+/*
 router.post('/update/:id', async (req, res) => {
     try {
         const diario = await DadoCalibrador.findByIdAndUpdate(req.params.id, {new: true})
@@ -56,9 +57,9 @@ router.post('/update/:id', async (req, res) => {
         return res.status(400).send({ error: "Deu ruim!  " + err })
     }
 })
+*/
 
 
-/*
 router.post('/update/:id', async (req, res) => {
     DadoCalibrador.findById(req.params.id, function(err, dado){
         if (!dado) {
@@ -83,5 +84,5 @@ router.post('/update/:id', async (req, res) => {
         })
     })
 })
-*/
+
 module.exports = app => app.use('/curiometro', router)
