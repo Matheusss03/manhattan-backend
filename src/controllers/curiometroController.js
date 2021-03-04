@@ -26,6 +26,13 @@ router.post('/add', async (req, res) => {
 
 /* Pega um em específico */
 router.get('/:id', async (req, res) => {
+    const id = req.params.id
+
+    await DadoCalibrador.find(id, function(err, dado){
+        res.json(dado)
+    })
+
+    /*
     try {
         const dado = await DadoCalibrador.findById(req.params.id)
 
@@ -33,6 +40,7 @@ router.get('/:id', async (req, res) => {
     } catch (err) {
         return res.status(400).send({error: 'Erro ao pegar objeto!  ' + err})
     }
+    */
 })
 
 /* Deleta um especíico */
