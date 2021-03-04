@@ -10,5 +10,6 @@ app.use(bodyParser.urlencoded({ extended: false}))
 
 require('./controllers/authController')(app)
 require('./controllers/curiometroController')(app)
+require('./controllers/seladaController')(app)
 
 app.listen(process.env.PORT || 3000)
