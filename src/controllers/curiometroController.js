@@ -47,7 +47,7 @@ router.get('/delete/:id', async (req, res) => {
 })
 
 /* Atualizar um diário */
-router.put('/update/:id', async (req, res) => {
+router.post('/update/:id', async (req, res) => {
     try {
         const diario = await DadoCalibrador.findByIdAndUpdate(req.params.id, {new: true})
 
