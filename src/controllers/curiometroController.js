@@ -28,7 +28,7 @@ router.post('/add', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const id = req.params.id
 
-    await DadoCalibrador.find(id, function(err, dado){
+    await DadoCalibrador.findById(id, function(err, dado){
         if(err) res.status(400).send({error: 'Erro ao pegar o elemento'+ id + '  ' + err})
         else res.json(dado)
     })
@@ -56,19 +56,6 @@ router.get('/delete/:id', async (req, res) => {
 })
 
 /* Atualizar um diário */
-/*
-router.post('/update/:id', async (req, res) => {
-    try {
-        const diario = await DadoCalibrador.findByIdAndUpdate(req.params.id, {new: true})
-
-        return res.send( { diario })
-    } catch (err) {
-        return res.status(400).send({ error: "Deu ruim!  " + err })
-    }
-})
-*/
-
-
 router.post('/update/:id', async (req, res) => {
     DadoCalibrador.findById(req.params.id, function(err, dado){
         if (!dado) {

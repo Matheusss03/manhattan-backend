@@ -39,6 +39,38 @@ const Instituicao = new Schema({
     unique: true,
     lowercase: true
   },
+  fonte_selada: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Selada'
+  }],
+  fonte_nao_selada: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'NaoSelada'
+  }],
+  instrumento: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Instrumento'
+  }],
+  exatidao_precisao: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ExatidaoPrecisao'
+  }],
+  geometria: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Geometria'
+  }],
+  linearidade: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Linearidade'
+  }],
+  calibrador: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Calibrador'
+  }],
+  usuario: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Usuario'
+  }],
   endereco: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Endereco',

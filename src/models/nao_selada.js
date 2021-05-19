@@ -20,6 +20,11 @@ const NaoSelada = new Schema({
     required: true,
     enum: ["mCi","µCi","kBq","MBq"]
   },
+  instituicao: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Instituicao',
+    required: true
+  },
   dataCalibracao: {
     type: Date, 
     default: () => Date.now() - 3*60*60*1000

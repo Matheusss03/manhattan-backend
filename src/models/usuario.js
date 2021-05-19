@@ -11,8 +11,12 @@ var validateEmail = function(email) {
 const Usuario = new Schema({
   tipo: {
     type: String,
-    enum: ["Supervisor de Radioproteção", "Responsável Técnico", "Operador", "Titular"],
+    enum: ["Supervisor de Radioproteção", "Responsável Técnico", "Operador", "Titular", "Físico"],
     required: true
+  },
+  privilegio: {
+    type: String,
+    enum: ["Administrador", "Serviço", "Técnico", "Externo"]
   },
   nome: {
     type: String,
@@ -58,6 +62,12 @@ const Usuario = new Schema({
     type: String,
     enum: ["CRM","CRF","COREN","CRBM"]
   },
+  instituicoes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Instituicao',
+    required: function() {
+      return this.privilegio !== "Administrador"
+  }}],
   dataAgora: {
     type: Date, 
     default: () => Date.now() - 3*60*60*1000

@@ -20,7 +20,12 @@ const ExatidaoPrecisao = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'DadoExatidaoPrecisao',
       required: true
-  }]
+  }],
+  instituicao: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Instituicao',
+    required: true
+  }
 })
 
 module.exports = mongoose.model("ExatidaoPrecisao", ExatidaoPrecisao)

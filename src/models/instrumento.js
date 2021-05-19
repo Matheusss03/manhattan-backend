@@ -35,6 +35,11 @@ const Instrumento = new Schema({
     required: function() {
       return this.tipo === "Detector GM";
     }
+  },
+  instituicao: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Instituicao',
+    required: true
   }
 },
 {

@@ -45,7 +45,7 @@ router.get('/delete/:id', async (req, res) => {
     }
 })
 
-
+/*
 router.post('/update/:id', async (req, res) => {
     Selada.findById(req.params.id, function(err, dado){
         if (!dado) {
@@ -70,5 +70,5 @@ router.post('/update/:id', async (req, res) => {
         })
     })
 })
-
+*/
 module.exports = app => app.use('/selada', router)
