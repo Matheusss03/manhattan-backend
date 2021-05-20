@@ -76,12 +76,7 @@ router.post('/authenticate', async (req, res) => {
                 res.status(404).send({ error: 'Usuário não existente' })
             }
 
-            var senhaValida = bcrypt.compareSync(
-                req.body.senha,
-                user.senha
-            )
-
-            if (!senhaValida) {
+            if (!bcrypt.compare(req.body.senha, user.senha)) {
                 return res.status(401).send({ error: 'Senha inválida!' })
             }
 
