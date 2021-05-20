@@ -65,7 +65,7 @@ router.post('/update/:id', async (req, res) => {
 
 /* Autenticação */
 router.post('/authenticate', async (req, res) => {
-    User.findOne({ nome: req.body.nome })
+    User.findOne({ email: req.body.email })
         .exec((error, user) => {
             if (error) {
                 res.status(500).send({ error: 'Usuário não encontrado' })
