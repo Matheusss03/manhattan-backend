@@ -16,7 +16,7 @@ const Usuario = new Schema({
   },
   privilegio: {
     type: String,
-    enum: ["Administrador", "Serviço", "Técnico", "Externo"]
+    enum: ["SUPER_ADMIN", "ADMIN", "TÉCNICO", "SERVIÇO"]
   },
   nome: {
     type: String,
@@ -66,7 +66,7 @@ const Usuario = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Instituicao',
     required: function() {
-      return this.privilegio !== "Administrador"
+      return this.privilegio !== "SUPER_ADMIN"
   }}],
   dataAgora: {
     type: Date, 

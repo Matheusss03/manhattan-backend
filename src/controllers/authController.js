@@ -40,23 +40,22 @@ router.post('/add', async (req, res) => {
 
 /* Atualiza Usuário */
 router.post('/update/:id', async (req, res) => {
-    User.findById(req.params.id, function(err, dado){
-        if (!dado) {
-            res.status(404).send('Dado não encontrado')
+    User.findById(req.params.id, function(err, usuario){
+        if (!usuario) {
+            res.status(404).send('Usuário não encontrado')
         } else {
-            dado.nome = req.body.nome
-            dado.tipo = req.body.tipo
-            dado.cpf = req.body.cpf
-            dado.cheio = req.body.cheio
-            dado.vazio = req.body.vazio
-            dado.altaTensao = req.body.altaTensao
-            dado.bario = req.body.bario
-            dado.cesio = req.body.cesio
-            dado.cobalto = req.body.cobalto
+            usuario.nome = req.body.nome
+            usuario.cnen = req.body.cnen
+            usuario.conselho = req.body.conselho
+            usuario.cpf = req.body.cpf
+            usuario.email = req.body.email
+            usuario.tipo = req.body.tipo
+            usuario.privilegio = req.body.privilegio
+            usuario.celular = req.body.celular
         }
 
-        dado.save().then(dado => {
-            res.json('Dado atualizado!!')
+        usuario.save().then(usuario => {
+            res.json('Usuário atualizado!!')
         })
         .catch(err => {
             res.status(404).send('Atualização não foi possível')
