@@ -65,6 +65,32 @@ router.post('/update/:id', async (req, res) => {
 
 /* Autenticação */
 router.post('/authenticate', async (req, res) => {
+    await User.findOne({nome: req.body.nome})
+    .exec((error, user) => {
+        if(error){
+            res.status(500).send({error: 'Usuário não encontrado'})
+            return
+        }
+
+        if(!user) {
+            res.status(404).send({error: 'Usuário não existente'})
+        }
+
+        var senhaValida = bcrypt.compareSync(
+            req.body.senha,
+            user.senha
+        )
+
+        if(!await senhaValida) {
+            return res.status(401).send({ error: 'Senha inválida!' })
+        }
+
+        res.status(200).send({
+            user,
+            token: generateToken({ id: user.id })
+        })
+    })
+    /*
     const { email, senha} = req.body
 
     const user = await User.findOne({ email }).select('+senha')
@@ -83,6 +109,7 @@ router.post('/authenticate', async (req, res) => {
         user, 
         token: generateToken({ id: user.id })
     })
+    */
 })
 
 module.exports = app => app.use('/auth', router)
