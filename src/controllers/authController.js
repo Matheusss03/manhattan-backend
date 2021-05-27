@@ -72,6 +72,7 @@ router.get('/:id', async (req, res) => {
 })
 
 /* Autenticação */
+/*
 router.get('/login', function(req, res, next)  {
 	if (req.user) {
 		res.redirect('/')
@@ -79,7 +80,7 @@ router.get('/login', function(req, res, next)  {
 		res.render('login')
 	}
 })
-
+*/
 router.post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
 	failureRedirect : '/login',

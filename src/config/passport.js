@@ -7,7 +7,9 @@ module.exports = function(passport) {
             passwordField: 'senha',
             passReqToCallback: true
         }, function(req, email, senha, done){
-            User.findOne({email: email}).then(function(user) {
+            User.findOne({email: email}, function(err, user){
+                if (err) { return done(err) }
+                
                 if(!user) {
                     return done(null, false, { message: 'Email incorreto.' })
                 }
@@ -17,7 +19,7 @@ module.exports = function(passport) {
                 }
 
                 return done(null, user)
-        }).catch(function(err) {done(err, false)})
+            })
     }))
 
     passport.use('local-signup', new LocalStrategy({
