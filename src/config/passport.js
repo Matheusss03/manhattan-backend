@@ -6,8 +6,8 @@ module.exports = function(passport) {
             usernameField: 'email',
             passwordField: 'senha',
             passReqToCallback: true
-        }, function(req, email, senha, done){
-            User.findOne({email}, function(err, user){
+        }, function(req, username, password, done){
+            User.findOne({email: email}, function(err, user){
                 if (err) { return done(err) }
 
                 if(!user) {
