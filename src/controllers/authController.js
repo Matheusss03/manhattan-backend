@@ -19,24 +19,49 @@ router.post(
 );
 
 router.post('/login', (req, res) => {
-  const user = new User({
-    nome: req.body.nome,
-    email: req.body.email,
-    celular: req.body.celular,
-    conselho: req.body.conselho,
-    instituicao: req.body.instituicao,
-    cnen: req.body.cnen,
-    tipo: req.body.tipo,
-    senha: bcrypt.hashSync(req.body.senha, 8)
-  });
+  User.findOne({
+    email: req.body.email
+  })
+    .exec((err, user) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
 
-  user.save((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    } res.send({ message: "Usuário registrado com sucesso!" });
+      if (!user) {
+        return res.status(404).send({ message: "Usuário não encontrado!" });
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.senha,
+        user.senha
+      );
+
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Senha incorreta!"
         });
+      }
+
+      var token = jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: 86400 // 24 hours
       });
+
+      res.status(200).send({
+        id: user._id,
+        nome: user.nome,
+        email: user.email,
+        celular: user.celular,
+        instituicao: user.instituicao,
+        cnen: user.cnen,
+        tipo: user.tipo,
+        conselho: user.conselho,
+        roles: authorities,
+        accessToken: token
+      });
+    });
+});
 
 /*
 router.post(
