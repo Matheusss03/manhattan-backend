@@ -87,6 +87,10 @@ Usuario.pre('save', async function(next){
   next()
 })
 
+Usuario.methods.validPassword = function(senha) {
+  return bcrypt.compareSync(senha, this.senha);
+}
+
 Usuario.methods.isSuperAdmin = function() {
   return(this.privilegio === "SUPER_ADMIN")
 }
