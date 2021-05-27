@@ -13,7 +13,7 @@ module.exports = function(passport) {
                 }
 
                 if (!user.validPassword(senha)) {
-                    return done(null, false, , { message: 'Senha incorreta.' });
+                    return done(null, false, { message: 'Senha incorreta.' });
                 }
 
                 return done(null, user)
