@@ -87,6 +87,9 @@ Usuario.pre('save', async function(next){
   next()
 })
 */
+userSchema.statics.generateHash = function(senha) {
+  return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);
+}
 
 Usuario.methods.validPassword = function(senha) {
   return bcrypt.compareSync(senha, this.senha);
