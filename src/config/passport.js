@@ -1,8 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/usuario')
+const JWTstrategy = require('passport-jwt').Strategy
+const ExtractJWT = require('passport-jwt').ExtractJwt
 
 module.exports = function(passport) {
-    passport.use('local-login', new LocalStrategy({
+    passport.use('login', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'senha',
             passReqToCallback: true
@@ -23,6 +25,42 @@ module.exports = function(passport) {
             return done(error)
         }
     }))
+
+    passport.use(
+        'signup',
+        new LocalStrategy(
+          {
+            usernameField: 'email',
+            passwordField: 'senha'
+          },
+          async (req, done) => {
+            try {
+              const user = await User.create(req.body);
+      
+              return done(null, user);
+            } catch (error) {
+              done(error);
+            }
+          }
+        )
+      );
+
+
+    passport.use(
+        new JWTstrategy(
+          {
+            secretOrKey: 'TOP_SECRET',
+            jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+          },
+          async (token, done) => {
+            try {
+              return done(null, token.user);
+            } catch (error) {
+              done(error);
+            }
+          }
+        )
+      );
 /*
     passport.use('local-signup', new LocalStrategy({
         usernameField : 'email',

@@ -1,5 +1,5 @@
 const mongoose = require('../database')
-const bcrypt = require('bcrypt-nodejs')
+const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema
 
@@ -79,6 +79,24 @@ const Usuario = new Schema({
   collection: 'usuarios'
 })
 
+
+Usuario.pre(
+  'save',
+  async function(next) {
+    const hash = await bcrypt.hash(this.senha, 10);
+
+    this.senha = hash;
+    next();
+  }
+)
+
+Usuario.methods.isValidPassword = async function(senha) {
+  const user = this;
+  const compare = await bcrypt.compare(senha, user.senha);
+
+  return compare;
+}
+
 /*
 Usuario.pre('save', async function(next){
   const hash = await bcrypt.hash(this.senha, 10)
@@ -86,7 +104,7 @@ Usuario.pre('save', async function(next){
 
   next()
 })
-*/
+
 Usuario.statics.generateHash = function(senha) {
   return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);
 }
@@ -98,7 +116,7 @@ Usuario.methods.validPassword = function(senha) {
     return false
   }
 }
-
+*/
 Usuario.methods.isSuperAdmin = function() {
   return(this.privilegio === "SUPER_ADMIN")
 }
