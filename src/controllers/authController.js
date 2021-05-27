@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
       if (!user) {
         return res.status(404).send({ message: "Usuário não encontrado!" });
       }
-
+/*
       var passwordIsValid = bcrypt.compareSync(
         req.body.senha,
         user.senha
@@ -45,7 +45,7 @@ router.post('/login', (req, res) => {
           message: "Senha incorreta!"
         });
       }
-
+*/
       var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
