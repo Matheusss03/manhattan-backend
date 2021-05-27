@@ -92,7 +92,11 @@ Usuario.statics.generateHash = function(senha) {
 }
 
 Usuario.methods.validPassword = function(senha) {
-  return bcrypt.compareSync(senha, this.senha);
+  if(this.senha != null) {
+    return bcrypt.compareSync(senha, this.senha)
+  } else {
+    return false
+  }
 }
 
 Usuario.methods.isSuperAdmin = function() {

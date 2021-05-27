@@ -9,7 +9,7 @@ module.exports = function(passport) {
         }, function(req, email, senha, done){
             User.findOne({email: email}, function(err, user){
                 if (err) { return done(err) }
-                
+
                 if(!user) {
                     return done(null, false, { message: 'Email incorreto.' })
                 }
@@ -46,7 +46,6 @@ module.exports = function(passport) {
                 cnen: req.body.cnen,
                 conselho: req.body.conselho,
                 cpf: req.body.cpf,
-                email: req.body.email,
                 tipo: req.body.tipo,
                 celular: req.body.celular
             }).save(function(err, savedUser) {
