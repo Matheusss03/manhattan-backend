@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const authConfig = require('../config/auth.json')
+const passport = require('passport')
 
 const User = require('../models/usuario')
 
@@ -25,9 +26,6 @@ router.get('/todos', async (req, res) => {
 router.post('/add', async (req, res) => {
     try {
         const user = await User.create(req.body)
-
-        //let user = new User(req.body)
-        //user.save()
 
         return res.send( { 
             user,
@@ -63,48 +61,48 @@ router.post('/update/:id', async (req, res) => {
     })
 })
 
-/* Autenticação */
-router.post('/authenticate', async (req, res) => {
-    User.findOne({ email: req.body.email })
-        .exec((error, user) => {
-            if (error) {
-                res.status(500).send({ error: 'Usuário não encontrado' })
-                return
-            }
+/* Pega um em específico */
+router.get('/:id', async (req, res) => {
+    const id = req.params.id
 
-            if (!user) {
-                res.status(404).send({ error: 'Usuário não existente' })
-            }
-
-            if (!bcrypt.compare(req.body.senha, user.senha)) {
-                return res.status(401).send({ error: 'Senha inválida!' })
-            }
-
-            res.status(200).send({
-                user,
-                token: generateToken({ id: user.id })
-            })
-        })
-    /*
-    const { email, senha} = req.body
-
-    const user = await User.findOne({ email }).select('+senha')
-
-    if (!user) {
-        return res.status(400).send({ error: 'Usuário não existente'})
-    }
-
-    if (!await bcrypt.compare(senha, user.senha)) {
-        return res.status(400).send({ error: 'Senha inválida!' })
-    }
-
-    user.senha = undefined
-
-    res.send( { 
-        user, 
-        token: generateToken({ id: user.id })
+    await User.find(id, function(err, dado){
+        if(err) res.status(400).send({error: 'Erro ao pegar o elemento'+ id + '  ' + err})
+        else res.json(dado)
     })
-    */
 })
 
+/* Autenticação */
+router.get('/login', function(req, res, next)  {
+	if (req.user) {
+		res.redirect('/')
+	} else {
+		res.render('login')
+	}
+})
+
+router.post('/login', passport.authenticate('local-login', {
+	failureRedirect : '/auth/login',
+	failureFlash : false // allow flash messages
+}), function(req, res, next)  {
+	res.redirect('/')
+});
+
+
+
+/*
+router.post('/authenticate', async (req, res) => {
+    try {
+        const { email, senha } = req.body
+        const user = await User.findOne({ email })
+
+        if(!user) {
+            return res.status(400).send({ error: 'Usuário não existente'})
+        }
+
+        const senhaValida = await
+    }catch (error) {
+        return res.status(400).send({ error: 'Usuário não existente'})
+    }
+})
+*/
 module.exports = app => app.use('/auth', router)

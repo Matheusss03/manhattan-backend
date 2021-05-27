@@ -16,7 +16,8 @@ const Usuario = new Schema({
   },
   privilegio: {
     type: String,
-    enum: ["SUPER_ADMIN", "ADMIN", "TÉCNICO", "SERVIÇO"]
+    enum: ["SUPER_ADMIN", "ADMIN", "TÉCNICO", "SERVIÇO"],
+    default: "SERVIÇO"
   },
   nome: {
     type: String,
@@ -85,5 +86,21 @@ Usuario.pre('save', async function(next){
 
   next()
 })
+
+Usuario.methods.isSuperAdmin = function() {
+  return(this.privilegio === "SUPER_ADMIN")
+}
+
+Usuario.methods.isAdmin = function() {
+  return(this.privilegio === "ADMIN")
+}
+
+Usuario.methods.isTecnico = function() {
+  return(this.privilegio === "TÉCNICO")
+}
+
+Usuario.methods.isServico = function() {
+  return(this.privilegio === "SERVIÇO")
+}
 
 module.exports = mongoose.model("Usuario", Usuario)
