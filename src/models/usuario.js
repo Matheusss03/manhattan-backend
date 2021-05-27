@@ -87,7 +87,7 @@ Usuario.pre('save', async function(next){
   next()
 })
 */
-userSchema.statics.generateHash = function(senha) {
+Usuario.statics.generateHash = function(senha) {
   return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);
 }
 
