@@ -79,7 +79,7 @@ const Usuario = new Schema({
   collection: 'usuarios'
 })
 
-
+/*
 Usuario.pre(
   'save',
   async function(next) {
@@ -89,7 +89,7 @@ Usuario.pre(
     next();
   }
 )
-
+*/
 Usuario.methods.isValidPassword = async function(senha) {
   const user = this;
   const compare = await bcrypt.compare(senha, user.senha);

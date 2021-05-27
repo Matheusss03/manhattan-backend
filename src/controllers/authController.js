@@ -54,11 +54,11 @@ router.post('/login', (req, res) => {
         nome: user.nome,
         email: user.email,
         celular: user.celular,
-        instituicao: user.instituicao,
+        //instituicao: user.instituicao,
         cnen: user.cnen,
         tipo: user.tipo,
         conselho: user.conselho,
-        roles: authorities,
+        privilegio: user.privilegio,
         accessToken: token
       });
     });
