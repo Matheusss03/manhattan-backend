@@ -9,11 +9,11 @@ module.exports = function(passport) {
         }, function(req, email, senha, done){
             User.findOne({email: email}).then(function(user) {
                 if(!user) {
-                    return done(null, false)
+                    return done(null, false, { message: 'Email incorreto.' })
                 }
 
                 if (!user.validPassword(senha)) {
-                    return done(null, false);
+                    return done(null, false, , { message: 'Senha incorreta.' });
                 }
 
                 return done(null, user)
