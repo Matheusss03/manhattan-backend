@@ -79,13 +79,14 @@ const Usuario = new Schema({
   collection: 'usuarios'
 })
 
-
+/*
 Usuario.pre('save', async function(next){
   const hash = await bcrypt.hash(this.senha, 10)
   this.senha = hash
 
   next()
 })
+*/
 
 Usuario.methods.validPassword = function(senha) {
   return bcrypt.compareSync(senha, this.senha);
