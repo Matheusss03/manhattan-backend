@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
 })
 
 /* Autenticação */
-/*
+
 router.get('/login', function(req, res, next)  {
 	if (req.user) {
 		res.redirect('/')
@@ -80,12 +80,13 @@ router.get('/login', function(req, res, next)  {
 		res.render('login')
 	}
 })
-*/
+
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',
-	failureRedirect : '/login',
-	failureFlash : false 
-}));
+	failureRedirect : '/auth/login',
+	failureFlash : false // allow flash messages
+}), function(req, res, next)  {
+	res.redirect('/')
+});
 
 
 
