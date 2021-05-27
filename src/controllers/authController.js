@@ -37,8 +37,6 @@ router.post('/login', (req, res) => {
     } res.send({ message: "Usuário registrado com sucesso!" });
         });
       });
-  });
-});
 
 /*
 router.post(
