@@ -6,20 +6,22 @@ module.exports = function(passport) {
             usernameField: 'email',
             passwordField: 'senha',
             passReqToCallback: true
-        }, function(req, username, password, done){
-            User.findOne({username: username}, function(err, user){
-                if (err) { return done(err) }
+        }, async (email, senha, done) => {
+            try{
+                const user = await User.findOne({ email })
 
                 if(!user) {
                     return done(null, false, { message: 'Email incorreto.' })
                 }
 
-                if (!user.validPassword(password)) {
+                if (!user.validPassword(senha)) {
                     return done(null, false, { message: 'Senha incorreta.' });
                 }
 
                 return done(null, user)
-            })
+        } catch(error) {
+            return done(error)
+        }
     }))
 /*
     passport.use('local-signup', new LocalStrategy({
