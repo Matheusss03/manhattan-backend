@@ -21,7 +21,7 @@ module.exports = function(passport) {
                 return done(null, user)
             })
     }))
-
+/*
     passport.use('local-signup', new LocalStrategy({
         usernameField : 'email',
         passwordField : 'senha',
@@ -56,7 +56,7 @@ module.exports = function(passport) {
             })
         }).catch(function(err) {done(err, false)})
     }))
-
+*/
     passport.serializeUser(function(user, done) {
         done(null, user.id)
     })

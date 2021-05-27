@@ -26,6 +26,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 require('./controllers/authController')(app)
+require('./controllers/usuarioController')(app)
 require('./controllers/curiometroController')(app)
 require('./controllers/seladaController')(app)
 require('./controllers/instituicaoController')(app)
