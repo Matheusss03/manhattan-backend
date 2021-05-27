@@ -7,14 +7,14 @@ module.exports = function(passport) {
             passwordField: 'senha',
             passReqToCallback: true
         }, function(req, username, password, done){
-            User.findOne({email: email}, function(err, user){
+            User.findOne({username: username}, function(err, user){
                 if (err) { return done(err) }
 
                 if(!user) {
                     return done(null, false, { message: 'Email incorreto.' })
                 }
 
-                if (!user.validPassword(senha)) {
+                if (!user.validPassword(password)) {
                     return done(null, false, { message: 'Senha incorreta.' });
                 }
 
