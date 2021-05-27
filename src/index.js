@@ -11,6 +11,12 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 
+app.get('/', (req, res) => {
+    return res.json({
+        message: "API do sistema Manhattan."
+    });
+})
+
 app.use(session({
     secret: 'AlgoQueVoceNaoDeveriaSaber',
     saveUninitialized: false,

@@ -3,6 +3,7 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 const router = express.Router()
+const User = require('../models/usuario')
 
 /* Autenticação */
 
@@ -17,6 +18,29 @@ router.post(
     }
 );
 
+router.post('/login', (req, res) => {
+  const user = new User({
+    nome: req.body.nome,
+    email: req.body.email,
+    celular: req.body.celular,
+    conselho: req.body.conselho,
+    instituicao: req.body.instituicao,
+    cnen: req.body.cnen,
+    tipo: req.body.tipo,
+    senha: bcrypt.hashSync(req.body.senha, 8)
+  });
+
+  user.save((err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    } res.send({ message: "Usuário registrado com sucesso!" });
+        });
+      });
+  });
+});
+
+/*
 router.post(
     '/login',
     async (req, res, next) => {
@@ -50,7 +74,7 @@ router.post(
     }
 )
 
-/*
+
 router.get('/login', function(req, res, next)  {
 	if (req.user) {
 		res.redirect('/')
