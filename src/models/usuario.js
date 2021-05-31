@@ -89,15 +89,15 @@ Usuario.pre(
     next();
   }
 )
-*/
+
 Usuario.methods.isValidPassword = async function(senha) {
   const user = this;
   const compare = await bcrypt.compare(senha, user.senha);
 
   return compare;
 }
+*/
 
-/*
 Usuario.pre('save', async function(next){
   const hash = await bcrypt.hash(this.senha, 10)
   this.senha = hash
@@ -105,6 +105,7 @@ Usuario.pre('save', async function(next){
   next()
 })
 
+/*
 Usuario.statics.generateHash = function(senha) {
   return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);
 }

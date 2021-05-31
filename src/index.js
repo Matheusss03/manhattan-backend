@@ -1,9 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')
-const passport = require('passport')
 
 const app = express()
 
@@ -16,20 +13,6 @@ app.get('/', (req, res) => {
         message: "API do sistema Manhattan."
     });
 })
-
-app.use(session({
-    secret: 'AlgoQueVoceNaoDeveriaSaber',
-    saveUninitialized: false,
-    resave: false,
-    store: MongoStore.create({
-        mongoUrl: "mongodb+srv://deploy:manhattan123@mongo-manhattan.hjeqi.mongodb.net/manhattan?retryWrites=true&w=majority",
-        ttl: 1 * 24 * 60 * 60
-    })
-}))
-
-require('./config/passport')(passport)
-app.use(passport.initialize())
-app.use(passport.session())
 
 require('./controllers/authController')(app)
 require('./controllers/usuarioController')(app)
