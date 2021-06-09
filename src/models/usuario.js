@@ -105,7 +105,7 @@ Usuario.pre('save', async function(next){
   next()
 })
 
-Usuario.pre('findByIdAndUpdate', async function(next){
+Usuario.pre('findOneAndUpdate', async function(next){
   const hash = await bcrypt.hash(this._update.senha, 10)
   this._update.senha = hash
 
