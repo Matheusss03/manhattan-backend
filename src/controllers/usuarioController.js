@@ -1,6 +1,7 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const authConfig = require('../config/auth.json')
+const bcrypt = require("bcryptjs")
 
 const User = require('../models/usuario')
 
@@ -20,7 +21,7 @@ router.get('/todos', async (req, res) => {
     })
 })
 
-/* Registro Novo */
+/* Usuário Novo */
 router.post('/add', async (req, res) => {
     try {
         const user = await User.create(req.body)
@@ -36,6 +37,13 @@ router.post('/add', async (req, res) => {
 
 /* Atualiza Usuário */
 router.put('/update/:id', async (req, res) => {
+
+    var senha = req.body.senha
+
+    bcrypt.hash(senha, (hash) => {
+        req.body.senha = hash
+    })
+
     await User.findByIdAndUpdate(req.params.id, req.body)
     .then(usuario => res.json({ msg: 'Atualizado com sucesso'}))
     .catch(err =>
