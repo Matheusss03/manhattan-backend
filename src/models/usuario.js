@@ -105,6 +105,13 @@ Usuario.pre('save', async function(next){
   next()
 })
 
+Usuario.pre('findByIdAndUpdate', async function(next){
+  const hash = await bcrypt.hash(this.senha, 10)
+  this.senha = hash
+
+  next()
+})
+
 /*
 Usuario.statics.generateHash = function(senha) {
   return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);

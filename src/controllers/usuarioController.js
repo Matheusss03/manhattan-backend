@@ -37,13 +37,6 @@ router.post('/add', async (req, res) => {
 
 /* Atualiza Usuário */
 router.put('/update/:id', async (req, res) => {
-
-    var senha = req.body.senha
-
-    bcrypt.hash(senha, (hash) => {
-        req.body.senha = hash
-    })
-
     await User.findByIdAndUpdate(req.params.id, req.body)
     .then(usuario => res.json({ msg: 'Atualizado com sucesso'}))
     .catch(err =>
