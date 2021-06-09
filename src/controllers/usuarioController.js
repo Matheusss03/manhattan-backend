@@ -35,7 +35,12 @@ router.post('/add', async (req, res) => {
 })
 
 /* Atualiza Usuário */
-router.post('/update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
+    await User.findByIdAndUpdate(req.params.id, req.body)
+    .then(usuario => res.json({ msg: 'Atualizado com sucesso'}))
+    .catch(err =>
+        res.status(400).json({ error: 'Erro ao atualizar o banco' }))
+    /*
     User.findById(req.params.id, function(err, usuario){
         if (!usuario) {
             res.status(404).send('Usuário não encontrado')
@@ -57,16 +62,22 @@ router.post('/update/:id', async (req, res) => {
             res.status(404).send('Atualização não foi possível')
         })
     })
+    */
 })
 
 /* Pega um em específico */
 router.get('/:id', async (req, res) => {
+    await User.findById(req.params.id)
+    .then(usuario => res.json(usuario))
+    .catch(err => res.status(404).json({userfound: 'Usuário não encontrado'}))
+    /*
     const id = req.params.id
 
     await User.find(id, function(err, dado){
         if(err) res.status(400).send({error: 'Erro ao pegar o elemento'+ id + '  ' + err})
         else res.json(dado)
     })
+    */
 })
 
 
