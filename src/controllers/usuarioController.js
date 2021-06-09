@@ -1,7 +1,6 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const authConfig = require('../config/auth.json')
-const bcrypt = require("bcryptjs")
 
 const User = require('../models/usuario')
 
@@ -38,32 +37,8 @@ router.post('/add', async (req, res) => {
 /* Atualiza Usuário */
 router.put('/update/:id', async (req, res) => {
     await User.findByIdAndUpdate(req.params.id, req.body)
-    .then(usuario => res.json({ msg: 'Atualizado com sucesso'}))
-    .catch(err =>
-        res.status(400).json({ error: 'Erro ao atualizar o banco' }))
-    /*
-    User.findById(req.params.id, function(err, usuario){
-        if (!usuario) {
-            res.status(404).send('Usuário não encontrado')
-        } else {
-            usuario.nome = req.body.nome
-            usuario.cnen = req.body.cnen
-            usuario.conselho = req.body.conselho
-            usuario.cpf = req.body.cpf
-            usuario.email = req.body.email
-            usuario.tipo = req.body.tipo
-            usuario.privilegio = req.body.privilegio
-            usuario.celular = req.body.celular
-        }
-
-        usuario.save().then(usuario => {
-            res.json('Usuário atualizado!!')
-        })
-        .catch(err => {
-            res.status(404).send('Atualização não foi possível')
-        })
-    })
-    */
+    .then(usuario => res.json(usuario))
+    .catch(err => res.status(400).json({ error: 'Erro ao atualizar o banco' }))
 })
 
 /* Pega um em específico */
@@ -71,14 +46,13 @@ router.get('/:id', async (req, res) => {
     await User.findById(req.params.id)
     .then(usuario => res.json(usuario))
     .catch(err => res.status(404).json({userfound: 'Usuário não encontrado'}))
-    /*
-    const id = req.params.id
+})
 
-    await User.find(id, function(err, dado){
-        if(err) res.status(400).send({error: 'Erro ao pegar o elemento'+ id + '  ' + err})
-        else res.json(dado)
-    })
-    */
+/* Exclui um usuário */
+router.delete('/delete/:id', async (req, res) => {
+    await User.findByIdAndRemove(req.params.id, req.body)
+    .then(usuario=> res.json(usuario))
+    .catch(err => res.status(404).json({ error: 'Usuário não encontrado' }))
 })
 
 

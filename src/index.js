@@ -20,5 +20,6 @@ require('./controllers/curiometroController')(app)
 require('./controllers/seladaController')(app)
 require('./controllers/instituicaoController')(app)
 require('./controllers/enderecoController')(app)
+require('./controllers/naoSeladaController')(app)
 
 app.listen(process.env.PORT || 8000)

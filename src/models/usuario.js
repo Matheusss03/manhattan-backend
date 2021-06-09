@@ -79,25 +79,6 @@ const Usuario = new Schema({
   collection: 'usuarios'
 })
 
-/*
-Usuario.pre(
-  'save',
-  async function(next) {
-    const hash = await bcrypt.hash(this.senha, 10);
-
-    this.senha = hash;
-    next();
-  }
-)
-
-Usuario.methods.isValidPassword = async function(senha) {
-  const user = this;
-  const compare = await bcrypt.compare(senha, user.senha);
-
-  return compare;
-}
-*/
-
 Usuario.pre('save', async function(next){
   const hash = await bcrypt.hash(this.senha, 10)
   this.senha = hash
@@ -112,19 +93,6 @@ Usuario.pre('findOneAndUpdate', async function(next){
   next()
 })
 
-/*
-Usuario.statics.generateHash = function(senha) {
-  return bcrypt.hashSync(senha, bcrypt.genSaltSync(8), null);
-}
-
-Usuario.methods.validPassword = function(senha) {
-  if(this.senha != null) {
-    return bcrypt.compareSync(senha, this.senha)
-  } else {
-    return false
-  }
-}
-*/
 Usuario.methods.isSuperAdmin = function() {
   return(this.privilegio === "SUPER_ADMIN")
 }
