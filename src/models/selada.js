@@ -38,8 +38,7 @@ const Selada = new Schema({
   },
   instituicao: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Instituicao',
-    required: true
+    ref: 'Instituicao'
   },
   dataCalibracao: {
     type: Date, 
