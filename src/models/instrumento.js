@@ -38,8 +38,7 @@ const Instrumento = new Schema({
   },
   instituicao: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Instituicao',
-    required: true
+    ref: 'Instituicao'
   }
 },
 {

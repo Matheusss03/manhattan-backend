@@ -61,7 +61,7 @@ const Usuario = new Schema({
   },
   conselho: {
     type: String,
-    enum: ["CRM","CRF","COREN","CRBM"]
+    enum: ["CRM","CRF","COREN","CRBM","CRTR"]
   },
   instituicoes: [{
     type: mongoose.Schema.Types.ObjectId,

@@ -13,18 +13,15 @@ const ExatidaoPrecisao = new Schema({
   },
   selada: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Selada',
-      required: true
+      ref: 'Selada'
   },
   dado: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'DadoExatidaoPrecisao',
-      required: true
+      ref: 'DadoExatidaoPrecisao'
   }],
   instituicao: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Instituicao',
-    required: true
+    ref: 'Instituicao'
   }
 })
 

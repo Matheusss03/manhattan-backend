@@ -39,6 +39,37 @@ const Instituicao = new Schema({
     unique: true,
     lowercase: true
   },
+  razao: {
+    type: String,
+    min: 5,
+    max: 80,
+    required: true
+  },
+  cep: {
+    type: String,
+    required: true
+  },
+  bairro: {
+    type: String,
+    required: true
+  },
+  cidade: {
+    type: String,
+    required: true
+  },
+  uf: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 2
+  },
+  logradouro: {
+    type: String,
+    required: true
+  },
+  complemento: {
+    type: String
+  },
   fonte_selada: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Selada'
@@ -70,12 +101,7 @@ const Instituicao = new Schema({
   usuario: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Usuario'
-  }],
-  endereco: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Endereco',
-    required: true
-  }
+  }]
 },
 {
     collection: 'instituicoes'
