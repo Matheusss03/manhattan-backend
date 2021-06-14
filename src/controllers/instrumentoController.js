@@ -16,9 +16,9 @@ router.get('/todos', async (req, res) => {
 /* Novo Instrumento */
 router.post('/add', async (req, res) => {
     try {
-        const maquina = await Instrumento.create(req.body)
+        const instrumento = await Instrumento.create(req.body)
 
-        return res.send( { maquina })
+        return res.send( { instrumento })
     } catch (err) {
         return res.status(400).send({ error: "Deu ruim!  " + err })
     }
