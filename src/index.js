@@ -21,5 +21,6 @@ require('./controllers/seladaController')(app)
 require('./controllers/instituicaoController')(app)
 require('./controllers/enderecoController')(app)
 require('./controllers/naoSeladaController')(app)
+require('./controllers/instrumentoController')(app)
 
 app.listen(process.env.PORT || 8000)
