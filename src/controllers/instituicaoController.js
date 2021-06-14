@@ -2,11 +2,8 @@ const express = require('express')
 const authMiddleware = require('../middlewares/auth')
 
 const Instituicao = require('../models/instituicao')
-const Usuario = require('../models/usuario')
 
 const router = express.Router()
-
-router.use(authMiddleware)
 
 // Lista todas as instituições
 router.get('/todos', async (req, res) => {
