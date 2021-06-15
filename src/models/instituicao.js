@@ -45,6 +45,9 @@ const Instituicao = new Schema({
     max: 80,
     required: true
   },
+  grupo: {
+    type: String
+  },
   cep: {
     type: String,
     required: true

@@ -11,6 +11,10 @@ const NaoSelada = new Schema({
   meiaVida: {
     type: Number
   },
+  unidadeTempo: {
+    type: String,
+    enum: ["anos", "dias"]
+  },
   atividade: {
     type: Number,
     required: true

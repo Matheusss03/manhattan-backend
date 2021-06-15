@@ -23,6 +23,10 @@ const Selada = new Schema({
   meiaVida: {
     type: Number
   },
+  unidadeTempo: {
+    type: String,
+    enum: ["anos", "dias"]
+  },
   certificadoPDF: {
     data: Buffer,
     contentType: String
