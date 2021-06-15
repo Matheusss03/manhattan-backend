@@ -5,11 +5,15 @@ const NaoSelada = require('../models/nao_selada')
 const router = express.Router()
 
 /* Listar Todas Fontes NaoSeladas*/
-router.get('/todos', async (req, res) => {
-    await NaoSelada.find()
-      .then(Naoselada => res.json(Naoselada))
-      .catch(err => res.status(404).json({ nobooksfound: 'Fontes não seladas não encontradas' }));
-});
+router.post('/add', async (req, res) => {
+  try {
+      const fonte_nao_selada = await NaoSelada.create(req.body)
+
+      return res.send( { fonte_nao_selada })
+  } catch (err) {
+      return res.status(400).send({ error: "Deu ruim!  " + err })
+  }
+})
 
 /* Nova Fonte */
 router.post('/add', async (req, res) => {

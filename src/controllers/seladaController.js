@@ -13,10 +13,14 @@ router.get('/todos', async (req, res) => {
 
 /* Nova Fonte */
 router.post('/add', async (req, res) => {
-    await Selada.create(req.body)
-      .then(selada => res.json({ msg: 'Fonte selada adicionada com sucesso' }))
-      .catch(err => res.status(400).json({ error: 'Fonte selada não adicionada ' + err }));
-});
+  try {
+      const fonte_selada = await Selada.create(req.body)
+
+      return res.send( { fonte_selada })
+  } catch (err) {
+      return res.status(400).send({ error: "Deu ruim!  " + err })
+  }
+})
 
 /* Pega uma em específico */
 router.get('/:id', async (req, res) => {
