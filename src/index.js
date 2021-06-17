@@ -19,7 +19,6 @@ require('./controllers/usuarioController')(app)
 require('./controllers/curiometroController')(app)
 require('./controllers/seladaController')(app)
 require('./controllers/instituicaoController')(app)
-require('./controllers/enderecoController')(app)
 require('./controllers/naoSeladaController')(app)
 require('./controllers/instrumentoController')(app)
 
