@@ -4,8 +4,7 @@ const Schema = mongoose.Schema
 
 const DadoCalibrador = new Schema({
   ajusteZero: {
-    type: String,
-    default: "N/A",
+    type: Number,
     required: true
   },
   data: {
@@ -13,37 +12,34 @@ const DadoCalibrador = new Schema({
     default: () => Date.now() - 3*60*60*1000
   },
   altaTensao: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   bg: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   cheio: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   vazio: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   bario: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   cesio: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   cobalto: {
-    type: String,
-    default: "N/A"
+    type: Number
   },
   medidaCobalto: {
     type: String,
     enum: ["µCi", "mCi"],
     default: 'mCi'
+  },
+  usuario: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Usuario'
   }
 },
 
