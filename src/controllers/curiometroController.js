@@ -1,8 +1,11 @@
 const express = require('express')
+const authMiddleware = require('../middlewares/auth')
 
 const DadoCalibrador = require('../models/dado_calibrador')
 
 const router = express.Router()
+
+router.use(authMiddleware)
 
 /* Listar Todos Diarios*/
 router.get('/todos', async (req, res) => {
@@ -16,7 +19,7 @@ router.get('/todos', async (req, res) => {
 /* Novo Registro */
 router.post('/add', async (req, res) => {
     try {
-        const diario = await DadoCalibrador.create({ ...req.body, usuario: req.usuario._id })
+        const diario = await DadoCalibrador.create({ ...req.body, usuario: req.userId })
 
         return res.send( { diario })
     } catch (err) {
