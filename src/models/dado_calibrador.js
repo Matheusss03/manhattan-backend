@@ -37,6 +37,14 @@ const DadoCalibrador = new Schema({
     enum: ["µCi", "mCi"],
     default: 'mCi'
   },
+  aceite: {
+    type: Boolean,
+    default: false
+  },
+  instrumento: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Instrumento'
+  },
   usuario: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Usuario'
