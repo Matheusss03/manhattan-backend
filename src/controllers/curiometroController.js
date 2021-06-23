@@ -16,7 +16,7 @@ router.get('/todos', async (req, res) => {
 /* Novo Registro */
 router.post('/add', async (req, res) => {
     try {
-        const diario = await DadoCalibrador.create({ ...req.body, usuario: req.usuarioId })
+        const diario = await DadoCalibrador.create({ ...req.body, usuario: req.usuario._id })
 
         return res.send( { diario })
     } catch (err) {
